@@ -1,7 +1,7 @@
 import React from 'react';
 import './index.css';
 
-class App extends React.Component {
+class InvestorForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -15,7 +15,7 @@ class App extends React.Component {
   }
   async componentDidMount() {
     await this.setState({
-      ...this.state, investmentAmount: "", investmentType: "", netWorth: "", yearlyIncome: "", creditScore: ""
+      ...this.state, investmentAmount: "", investmentType: "", netWorth: "", yearlyIncome: "", creditScore: "", errors: []
     })
   }
   onChange = (e) => {
@@ -23,13 +23,12 @@ class App extends React.Component {
   }
   handleClick = () => {
     if (!this.handleValidation()) {
-      // alert("Errors");
+
     }
   }
   handleValidation = () => {
     let errors = [];
     let formIsValid = true;
-    //Investment Amount
     if (this.state.investmentAmount === "") {
       formIsValid = false;
       errors.push("Investment Amount cannot be empty")
@@ -117,7 +116,7 @@ class App extends React.Component {
           /><br />
           <button className="button" onClick={() => this.handleClick()}>Submit</button>
         </div>
-        {this.state.errors.length > 0 && <pre>
+        {this.state.errors.length > 0 && <pre className="pre">
           <p>Errors</p>
           {this.state.errors.map((err, i) => (
             <li key={i}>
@@ -129,4 +128,4 @@ class App extends React.Component {
     )
   }
 }
-export default App;
+export default InvestorForm;

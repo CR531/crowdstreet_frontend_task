@@ -1,12 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import InvestorForm from './InvestorForm';
+// import NewAccountPage from './NewAccountPage';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <InvestorForm />
   </React.StrictMode>,
   document.getElementById('root')
 );

@@ -51,8 +51,16 @@ code {
   width: 42%;
   height: 30px;
 }
-pre {
+.pre {
   color: red;
+  text-align: left;
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier,
+    monospace;
+  padding: 1em;
+  background: #f8f8f8;
+}
+.pre_success {
+  color:green;
   text-align: left;
   font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier,
     monospace;
