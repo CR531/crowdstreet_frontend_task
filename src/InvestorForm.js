@@ -70,7 +70,7 @@ class InvestorForm extends React.Component {
       <React.Fragment>
 
         <br />
-        <p className="header">CrowdStreet Front-End Task <br /> Pre-Approval for an Investor</p>
+        <p className="header">Crowd Street<br /> Pre-Approval for an Investor</p>
         <br />
         <div className="div_css">
           <label className="label">Enter Investment Amount :</label>

@@ -61,7 +61,7 @@ class NewAccountPage extends React.Component {
         return (
             <React.Fragment>
                 <br />
-                <p className="header">CrowdStreet Front-End Task <br /> Create Account</p>
+                <p className="header">Crowd Street <br /> Create Account</p>
                 <br />
                 <div className="div_css">
                     <label className="label">Enter Username :</label>

@@ -29,6 +29,12 @@ code {
   font-size: larger;
   font-variant: all-small-caps;
 }
+.error_text{
+   font-weight: bold;
+  font-size: larger;
+  font-variant: all-small-caps;
+   margin-left: 37%;
+}
 .header{
   background: lightgray;
   height: 75px;
