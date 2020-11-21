@@ -11,3 +11,35 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.home_div{
+  display: flex;
+  justify-content: center;
+}
+.heading{
+  font-weight: bold;
+  font-size: larger;
+  font-variant: all-petite-caps;
+}
+.div_css {
+   font-family: sans-serif;
+   margin-left: 5%;
+}
+.label{
+  font-weight: lighter;
+  font-size: larger;
+  font-variant: all-petite-caps;
+}
+.input {
+  width: 30%;
+  margin: 0 auto;
+  font-size: 1em;
+  padding: 0.5em 0.75em;
+  margin-bottom: 1em;
+}
+
+.button {
+  font-size: 1em;
+  width: 30%;
+  height: 30px;
+}
+
