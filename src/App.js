@@ -69,11 +69,11 @@ class App extends React.Component {
   render() {
     return (
       <React.Fragment>
+
+        <br />
+        <p className="header">CrowdStreet Front-End Task <br /> Pre-Approval for an Investor</p>
+        <br />
         <div className="div_css">
-          <br />
-          <p className="heading">CrowdStreet Front-End Task</p>
-          <p className="heading">Pre-Approval for an Investor</p>
-          <br />
           <label className="label">Enter Investment Amount :</label>
           <br />
           <input
@@ -115,14 +115,12 @@ class App extends React.Component {
             value={this.state.creditScore}
             onChange={(value) => this.onChange(value)}
           /><br />
-          <div>
-            <button className="button" onClick={() => this.handleClick()}>Submit</button>
-          </div>
+          <button className="button" onClick={() => this.handleClick()}>Submit</button>
         </div>
         {this.state.errors.length > 0 && <pre>
           <p>Errors</p>
-          {this.state.errors.map(err => (
-            <li>
+          {this.state.errors.map((err, i) => (
+            <li key={i}>
               {err}
             </li>
           ))}

@@ -22,15 +22,23 @@ code {
 }
 .div_css {
    font-family: sans-serif;
-   margin-left: 5%;
+   margin-left: 35%;
 }
 .label{
   font-weight: lighter;
   font-size: larger;
-  font-variant: all-petite-caps;
+  font-variant: all-small-caps;
+}
+.header{
+  background: lightgray;
+  height: 75px;
+  text-align: center;
+  font-variant-caps:all-petite-caps ;
+  font-size: x-large;
+  font-weight: 500;
 }
 .input {
-  width: 30%;
+  width: 40%;
   margin: 0 auto;
   font-size: 1em;
   padding: 0.5em 0.75em;
@@ -38,11 +46,13 @@ code {
 }
 
 .button {
+  text-align: center;
   font-size: 1em;
-  width: 30%;
+  width: 42%;
   height: 30px;
 }
 pre {
+  color: red;
   text-align: left;
   font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier,
     monospace;
