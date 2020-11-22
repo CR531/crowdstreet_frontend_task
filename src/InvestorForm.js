@@ -10,20 +10,24 @@ class InvestorForm extends React.Component {
       netWorth: "",
       yearlyIncome: "",
       creditScore: "",
-      errors: []
+      errors: [],
+      api_response: {}
     }
   }
   async componentDidMount() {
     await this.setState({
-      ...this.state, investmentAmount: "", investmentType: "", netWorth: "", yearlyIncome: "", creditScore: "", errors: []
+      ...this.state, investmentAmount: "", investmentType: "", netWorth: "", yearlyIncome: "", creditScore: "", errors: [], api_response: {}
     })
+    //Mock Json data is called using API GET call
+    const response = await fetch('https://my-json-server.typicode.com/CR531/json_data/db');
+    const data = await response.json();
+    await this.setState({ ...this.state, api_response: data });
   }
   onChange = (e) => {
     this.setState({ ...this.state, [e.target.id]: e.target.value });
   }
   handleClick = () => {
     if (!this.handleValidation()) {
-
     }
   }
   handleValidation = () => {
@@ -68,7 +72,6 @@ class InvestorForm extends React.Component {
   render() {
     return (
       <React.Fragment>
-
         <br />
         <p className="header">Crowd Street<br /> Pre-Approval for an Investor</p>
         <br />
