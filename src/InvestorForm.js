@@ -1,6 +1,7 @@
 import React from 'react';
 import './index.css';
-
+import NewAccountPage from "./NewAccountPage";
+import DisqualifyPage from "./DisqualifyPage";
 class InvestorForm extends React.Component {
   constructor(props) {
     super(props);
@@ -11,23 +12,39 @@ class InvestorForm extends React.Component {
       yearlyIncome: "",
       creditScore: "",
       errors: [],
-      api_response: {}
+      api_response_status: "",
+      api_response_message: ""
     }
   }
   async componentDidMount() {
     await this.setState({
-      ...this.state, investmentAmount: "", investmentType: "", netWorth: "", yearlyIncome: "", creditScore: "", errors: [], api_response: {}
+      ...this.state, investmentAmount: "", investmentType: "", netWorth: "", yearlyIncome: "", creditScore: "", errors: [], api_response_status: "", api_response_message: ""
     })
-    //Mock Json data is called using API GET call
-    const response = await fetch('https://my-json-server.typicode.com/CR531/json_data/db');
+  }
+  apicall = async (url, option) => {
+    const response = await fetch(url);
     const data = await response.json();
-    await this.setState({ ...this.state, api_response: data });
+    await this.setState({ ...this.state, api_response_status: data.fakeData[option].status, api_response_message: data.fakeData[option].message });
   }
   onChange = (e) => {
     this.setState({ ...this.state, [e.target.id]: e.target.value });
   }
   handleClick = () => {
-    if (!this.handleValidation()) {
+    if (this.handleValidation()) {
+      let url = "https://my-json-server.typicode.com/CR531/json_data/db";
+      var a = Number(this.state.investmentAmount);
+      var b = Number(this.state.netWorth);
+      var c = Number(this.state.yearlyIncome);
+      var d = Number(this.state.creditScore);
+      if (a > 9000000) {
+        this.apicall(url, 2);
+      } else {
+        if ((a > (c / 5)) || (d < 600) || (a > (b * 0.03))) {
+          this.apicall(url, 0);
+        } else {
+          this.apicall(url, 1);
+        }
+      }
     }
   }
   handleValidation = () => {
@@ -71,62 +88,70 @@ class InvestorForm extends React.Component {
   }
   render() {
     return (
-      <React.Fragment>
-        <br />
-        <p className="header">Crowd Street<br /> Pre-Approval for an Investor</p>
-        <br />
-        <div className="div_css">
-          <label className="label">Enter Investment Amount :</label>
+      <React.Fragment>{
+        this.state.api_response_status === "" && <div>
           <br />
-          <input
-            className="input" type="number" placeholder="Currency" required
-            id="investmentAmount"
-            value={this.state.investmentAmount}
-            onChange={(value) => this.onChange(value)}
-          /><br />
-          <label className="label">Enter Investment Type :</label>
+          <p className="header">Crowd Street<br /> Pre-Approval for an Investor</p>
           <br />
-          <input
-            className="input" type="text" placeholder="Text" required
-            id="investmentType"
-            value={this.state.investmentType}
-            onChange={(value) => this.onChange(value)}
-          /><br />
-          <label className="label">Enter Total Net Worth :</label>
-          <br />
-          <input
-            className="input" type="number" placeholder="Currency" required
-            id="netWorth"
-            value={this.state.netWorth}
-            onChange={(value) => this.onChange(value)}
+          <div className="div_css">
+            <label className="label">Enter Investment Amount :</label>
+            <br />
+            <input
+              className="input" type="number" placeholder="Currency" required
+              id="investmentAmount"
+              value={this.state.investmentAmount}
+              onChange={(value) => this.onChange(value)}
+            /><br />
+            <label className="label">Enter Investment Type :</label>
+            <br />
+            <input
+              className="input" type="text" placeholder="Text" required
+              id="investmentType"
+              value={this.state.investmentType}
+              onChange={(value) => this.onChange(value)}
+            /><br />
+            <label className="label">Enter Total Net Worth :</label>
+            <br />
+            <input
+              className="input" type="number" placeholder="Currency" required
+              id="netWorth"
+              value={this.state.netWorth}
+              onChange={(value) => this.onChange(value)}
 
-          /><br />
-          <label className="label">Enter User Estimated Yearly Income :</label>
-          <br />
-          <input
-            className="input" type="number" placeholder="Currency" required
-            id="yearlyIncome"
-            value={this.state.yearlyIncome}
-            onChange={(value) => this.onChange(value)}
-          /><br />
-          <label className="label">Enter User Estimated Credit Score :</label>
-          <br />
-          <input
-            className="input" type="number" placeholder="Number from 300-850" required
-            id="creditScore"
-            value={this.state.creditScore}
-            onChange={(value) => this.onChange(value)}
-          /><br />
-          <button className="button" onClick={() => this.handleClick()}>Submit</button>
+            /><br />
+            <label className="label">Enter User Estimated Yearly Income :</label>
+            <br />
+            <input
+              className="input" type="number" placeholder="Currency" required
+              id="yearlyIncome"
+              value={this.state.yearlyIncome}
+              onChange={(value) => this.onChange(value)}
+            /><br />
+            <label className="label">Enter User Estimated Credit Score :</label>
+            <br />
+            <input
+              className="input" type="number" placeholder="Number from 300-850" required
+              id="creditScore"
+              value={this.state.creditScore}
+              onChange={(value) => this.onChange(value)}
+            /><br />
+            <button className="button" onClick={() => this.handleClick()}>Submit</button>
+          </div>
+          {this.state.errors.length > 0 && <pre className="pre">
+            <p>Errors</p>
+            {this.state.errors.map((err, i) => (
+              <li key={i}>
+                {err}
+              </li>
+            ))}
+          </pre>}
         </div>
-        {this.state.errors.length > 0 && <pre className="pre">
-          <p>Errors</p>
-          {this.state.errors.map((err, i) => (
-            <li key={i}>
-              {err}
-            </li>
-          ))}
-        </pre>}
+      }
+        {this.state.api_response_status === "badrequest" && <div>
+          <p>{this.state.api_response_message}</p>
+        </div>}
+        {this.state.api_response_status === "success" && <NewAccountPage />}
+        {this.state.api_response_status === "disqualify" && <DisqualifyPage />}
       </React.Fragment>
     )
   }
