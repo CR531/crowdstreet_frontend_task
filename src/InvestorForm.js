@@ -57,7 +57,7 @@ class InvestorForm extends React.Component {
     }
     if (this.state.creditScore !== "") {
       var x = Number(this.state.creditScore)
-      if (x < 300 || x > 850) {
+      if (x <= 300 || x >= 850) {
         formIsValid = false;
         errors.push("User Estimated Credit Score should be between 300-850")
       }
